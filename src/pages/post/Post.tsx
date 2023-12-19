@@ -5,10 +5,15 @@ import { PATHS } from "../../router/constants";
 import { Flex } from "@chakra-ui/react";
 import PostCard from "../../components/card/PostCard";
 import { useGetPostsQuery } from "../../api/postSlice";
+import Loader from "../../components/Loader/Loader";
 
 const Post = () => {
   const { POST_CREATE } = PATHS;
-  const { data: posts } = useGetPostsQuery();
+  const { data: posts, isLoading } = useGetPostsQuery();
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <Flex width="100%" direction="column">
